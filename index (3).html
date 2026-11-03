@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amir Hanna | Mid-Level .NET Developer</title>
+<meta name="color-scheme" content="light dark">
+<script>
+(function () {
+  var t = null;
+  try { t = localStorage.getItem("portfolio-theme"); } catch (e) {}
+  if (!t) t = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", t);
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Noto+Sans+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #E9EDF3; --pp: #FFFFFF; --ink: #101828; --mu: #52607A;
+  --ac: #2540FF; --on: #FFFFFF; --hl: #FFD84D; --ln: #C5CDDB;
+  --d: "Bricolage Grotesque", "Noto Sans Arabic", system-ui, sans-serif;
+  --b: "Newsreader", "Noto Sans Arabic", Georgia, serif;
+}
+[data-theme="dark"] {
+  --bg: #0A0E1A; --pp: #121829; --ink: #E8ECF8; --mu: #97A3C0;
+  --ac: #8FA2FF; --on: #0A0E1A; --ln: #26304A;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 18px/1.65 var(--b); transition: background .3s, color .3s;
+}
+html[dir="rtl"] { --d: "Noto Sans Arabic", system-ui, sans-serif; --b: "Noto Sans Arabic", system-ui, sans-serif; }
+html[dir="rtl"] body { font-size: 17px; line-height: 1.9; }
+/* Arabic letters are joined: no negative tracking, taller lines for marks */
+html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] .mail { letter-spacing: 0; }
+html[dir="rtl"] h1 { font-size: clamp(56px, 10vw, 130px); line-height: 1.25; }
+html[dir="rtl"] h1 span { padding-bottom: .1em; }
+html[dir="rtl"] .hel { font-style: normal; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--ac); outline-offset: 3px; }
+.w { max-width: 1120px; margin: auto; padding: 0 24px; }
+
+/* top bar */
+.bar { position: sticky; top: 0; z-index: 20; background: var(--bg); border-bottom: 1px solid var(--ln); transition: background .3s; }
+.bar .w { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; }
+.logo { font: 800 22px var(--d); text-decoration: none; letter-spacing: -.03em; }
+.logo i { font-style: normal; color: var(--ac); }
+.nav { display: flex; gap: 4px; font: 600 15px var(--d); }
+.nav a { text-decoration: none; padding: 8px 12px; color: var(--mu); border-bottom: 3px solid transparent; }
+.nav a:hover { color: var(--ink); }
+.nav a.on { color: var(--ink); border-color: var(--hl); }
+.ctl { display: flex; gap: 8px; align-items: center; }
+.ib {
+  font: 700 14px var(--d); min-width: 40px; height: 40px; padding: 0 12px; cursor: pointer;
+  background: transparent; color: var(--ink); border: 1px solid var(--ln); border-radius: 2px;
+}
+.ib:hover { border-color: var(--ink); }
+.mb { display: none; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; font: 700 15px var(--d); text-decoration: none;
+  padding: 12px 22px; border: 2px solid var(--ink); border-radius: 2px; cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--ink); }
+.b-p { background: var(--ac); color: var(--on); border-color: var(--ac); }
+.b-p:hover { box-shadow: 4px 4px 0 var(--ink); }
+.b-g { background: transparent; color: var(--ink); }
+.b-cv { background: var(--hl); color: #101828; border-color: #101828; }
+.b-cv:hover { box-shadow: 4px 4px 0 #101828; }
+.bar .b-cv { padding: 8px 16px; font-size: 14px; }
+@media (max-width: 920px) {
+  .nav { display: none; position: absolute; top: 100%; inset-inline: 0; flex-direction: column; background: var(--bg); border-bottom: 1px solid var(--ln); padding: 8px 24px 16px; }
+  .nav.open { display: flex; }
+  .mb { display: inline-block; }
+  .bar .b-cv span { display: none; }
+}
+
+/* hero */
+#home { padding: 56px 0 72px; }
+#home .w { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; align-items: end; }
+.bd { display: inline-flex; align-items: center; gap: 10px; font: 600 13px var(--d); padding: 6px 14px; border: 1px solid var(--ln); background: var(--pp); border-radius: 30px; margin-bottom: 28px; }
+.bd b { width: 9px; height: 9px; border-radius: 50%; background: #1FB36B; animation: pg 1.8s infinite; }
+@keyframes pg { to { box-shadow: 0 0 0 9px transparent; } 0% { box-shadow: 0 0 0 0 #1FB36B; } }
+.hel { font: 400 20px var(--b); color: var(--mu); margin: 0 0 4px; font-style: italic; }
+h1 { font: 800 clamp(64px, 12.5vw, 168px)/.86 var(--d); letter-spacing: -.055em; margin: 0 0 28px; }
+h1 span { display: block; overflow: hidden; padding-bottom: .06em; }
+h1 span em { display: block; font-style: normal; animation: rise .9s cubic-bezier(.2,.8,.2,1) both; }
+h1 span:nth-child(2) em { animation-delay: .12s; color: var(--ac); }
+@keyframes rise { from { transform: translateY(105%); } }
+.rl { font: 600 clamp(22px, 3vw, 32px)/1.2 var(--d); margin: 0 0 16px; }
+.lead { color: var(--mu); font-size: 21px; max-width: 34em; margin: 0 0 32px; }
+.acts { display: flex; flex-wrap: wrap; gap: 12px; }
+.soc { display: flex; gap: 10px; margin-top: 28px; }
+.ph { position: relative; margin: 0; justify-self: end; width: min(100%, 380px); }
+.ph::before { content: ""; position: absolute; inset: 22px -18px -18px 22px; background: var(--hl); border-radius: 999px 999px 0 0; }
+html[dir="rtl"] .ph::before { inset: 22px 22px -18px -18px; }
+.ph img { position: relative; display: block; width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 999px 999px 0 0; background: var(--pp); border: 2px solid var(--ink); }
+@media (max-width: 860px) {
+  #home .w { grid-template-columns: 1fr; }
+  .ph { justify-self: start; width: min(100%, 300px); order: -1; }
+}
+
+/* sections */
+section.s { padding: 84px 0; border-top: 1px solid var(--ln); }
+h2.t { font: 800 clamp(36px, 6vw, 68px)/1 var(--d); letter-spacing: -.04em; margin: 0 0 10px; }
+.sub { color: var(--mu); font-size: 20px; max-width: 36em; margin: 0 0 48px; }
+.pp { background: var(--pp); border: 1px solid var(--ln); }
+
+/* about */
+.ab { display: grid; grid-template-columns: 1.6fr 1fr; gap: 40px; align-items: start; }
+.ab h3, .cb h3 { font: 700 22px var(--d); margin: 0 0 14px; }
+.story { font-size: 22px; line-height: 1.6; margin: 0; }
+.facts { padding: 24px; }
+.row { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding: 11px 0; border-bottom: 1px solid var(--ln); font: 500 16px var(--d); }
+.row:last-child { border: 0; }
+.row span:first-child { color: var(--mu); }
+.row a { text-decoration: none; }
+.row a:hover { color: var(--ac); text-decoration: underline; }
+@media (max-width: 860px) { .ab { grid-template-columns: 1fr; } .story { font-size: 20px; } }
+
+/* skills */
+.sk { display: grid; grid-template-columns: 260px 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--ln); }
+.sk:last-child { border-bottom: 1px solid var(--ln); }
+.sk h3 { font: 700 21px var(--d); margin: 0 0 4px; }
+.sk p { margin: 0; color: var(--mu); font-size: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; align-content: flex-start; }
+.tg { font: 500 14px var(--d); padding: 5px 12px; background: var(--pp); border: 1px solid var(--ln); border-radius: 2px; }
+@media (max-width: 760px) { .sk { grid-template-columns: 1fr; gap: 14px; } }
+
+/* experience */
+.xr { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 28px 0; border-top: 1px solid var(--ln); }
+.xr:last-child { border-bottom: 1px solid var(--ln); }
+.dt { font: 700 15px var(--d); color: var(--ac); }
+.xr h3, .pj h3 { font: 700 24px/1.2 var(--d); margin: 0 0 4px; }
+.xr h4 { font: 500 17px var(--d); color: var(--mu); margin: 0 0 12px; }
+.xr ul { margin: 0; padding-inline-start: 20px; }
+.xr li { margin: 6px 0; }
+@media (max-width: 760px) { .xr { grid-template-columns: 1fr; gap: 8px; } }
+
+/* projects */
+.pg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.pj { background: var(--pp); border: 1px solid var(--ln); border-top: 5px solid var(--ink); padding: 24px; display: flex; flex-direction: column; }
+.pj.ent { border-top-color: var(--ac); }
+.pj.w2 { grid-column: span 2; }
+.pj h3 { font-size: 22px; }
+.pj h4 { font: 500 16px var(--d); color: var(--ac); margin: 0 0 10px; }
+.pj .dt { color: var(--mu); font-weight: 600; margin-bottom: 6px; }
+.pj p { margin: 0 0 16px; font-size: 17px; line-height: 1.55; }
+.pj p a { color: var(--ac); }
+.pj .tags { margin-top: auto; }
+@media (max-width: 900px) { .pg { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 620px) { .pg { grid-template-columns: 1fr; } .pj.w2 { grid-column: auto; } }
+
+/* education + contact */
+.ed { border-inline-start: 6px solid var(--hl); padding: 6px 0 6px 24px; max-width: 700px; }
+html[dir="rtl"] .ed { padding: 6px 24px 6px 0; }
+.ed h3 { font: 700 26px/1.2 var(--d); margin: 4px 0; }
+.ed h4 { font: 500 18px var(--d); color: var(--mu); margin: 0 0 10px; }
+.ed p { margin: 0; }
+.mail { display: inline-block; font: 800 clamp(24px, 5.2vw, 60px)/1.1 var(--d); letter-spacing: -.03em; text-decoration: none; border-bottom: 6px solid var(--hl); margin-bottom: 40px; word-break: break-all; }
+.mail:hover { color: var(--ac); }
+.cb { max-width: 640px; padding: 28px; }
+.cb p { margin: 0 0 12px; color: var(--mu); }
+footer { border-top: 1px solid var(--ln); padding: 32px 0; color: var(--mu); font: 500 15px var(--d); }
+footer .w { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+footer p { margin: 0; }
+/* hover */
+.ib, .tg, .nav a { transition: background .2s, color .2s, border-color .2s, transform .2s; }
+.ib:hover { background: var(--ink); color: var(--bg); transform: translateY(-2px); }
+.tg:hover { background: var(--ac); color: var(--on); border-color: var(--ac); transform: translateY(-2px); }
+.ph img, .ph::before { transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+.ph:hover img { transform: translate(-6px, -6px); }
+.ph:hover::before { transform: translate(6px, 6px); }
+html[dir="rtl"] .ph:hover img { transform: translate(6px, -6px); }
+html[dir="rtl"] .ph:hover::before { transform: translate(-6px, 6px); }
+.pj, .sk, .xr { position: relative; }
+.pj { transition: transform .25s, box-shadow .25s; }
+.pj:hover { transform: translate(-4px, -4px); box-shadow: 6px 6px 0 var(--ink); }
+.pj.ent:hover { box-shadow: 6px 6px 0 var(--ac); }
+.sk, .xr { transition: background .25s; }
+.sk:hover, .xr:hover { background: var(--pp); }
+.xr .dt { transition: transform .25s; }
+.xr:hover .dt { transform: translateX(6px); }
+html[dir="rtl"] .xr:hover .dt { transform: translateX(-6px); }
+.row { transition: padding .2s; }
+.row:hover { padding-inline-start: 8px; }
+.mail { transition: color .2s, border-color .2s; }
+.mail:hover { border-color: var(--ac); }
+@media (hover: hover) {
+  .pj::after, .sk::after, .xr::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .25s;
+    background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--ac) 14%, transparent), transparent 70%);
+  }
+  .pj:hover::after, .sk:hover::after, .xr:hover::after { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  h1 span em, .bd b { animation: none; }
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="w">
+    <a class="logo" href="#home" dir="ltr"><i>&lt;</i>Amir<i>/&gt;</i></a>
+    <nav class="nav" id="nav">
+      <a href="#home" class="on" data-i18n="nav_home"></a>
+      <a href="#about" data-i18n="nav_about"></a>
+      <a href="#skills" data-i18n="nav_skills"></a>
+      <a href="#exp" data-i18n="nav_exp"></a>
+      <a href="#projects" data-i18n="nav_projects"></a>
+      <a href="#edu" data-i18n="nav_edu"></a>
+      <a href="#contact" data-i18n="nav_contact"></a>
+    </nav>
+    <div class="ctl">
+      <button class="ib" id="themeBtn" aria-label="Toggle dark / light mode"></button>
+      <button class="ib" id="langBtn" aria-label="Switch language"></button>
+      <a class="btn b-cv" href="cv.pdf" download="Amir-Hanna-CV.pdf">⬇ <span data-i18n="btn_cv"></span></a>
+      <button class="ib mb" id="mb" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="home">
+    <div class="w">
+      <div>
+        <div class="bd"><b></b><span data-i18n="badge"></span></div>
+        <p class="hel" data-i18n="hello"></p>
+        <h1><span><em data-i18n="name1"></em></span><span><em data-i18n="name2"></em></span></h1>
+        <h2 class="rl" data-i18n="title"></h2>
+        <p class="lead" data-i18n="lead"></p>
+        <div class="acts">
+          <a class="btn b-p" href="#contact" data-i18n="btn_contact"></a>
+          <a class="btn b-g" href="#projects" data-i18n="btn_work"></a>
+          <a class="btn b-cv" href="cv.pdf" download="Amir-Hanna-CV.pdf">⬇ <span data-i18n="btn_cv"></span></a>
+        </div>
+        <div class="soc">
+          <a class="ib" href="mailto:AmirHanna2001@gmail.com" aria-label="Email">✉</a>
+          <a class="ib" href="https://www.linkedin.com/in/amirhanna2001/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+          <a class="ib" href="https://github.com/amirhanna2001" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+        </div>
+      </div>
+      <figure class="ph"><img src="amir.png" alt="Amir Hanna"></figure>
+    </div>
+  </section>
+
+  <section class="s" id="about">
+    <div class="w">
+      <h2 class="t" data-i18n="about_title"></h2>
+      <p class="sub" data-i18n="about_sub"></p>
+      <div class="ab">
+        <div>
+          <h3 data-i18n="about_story_title"></h3>
+          <p class="story" data-i18n="about_story"></p>
+        </div>
+        <div class="pp facts">
+          <h3 data-i18n="about_facts_title"></h3>
+          <div class="row"><span data-i18n="fact_name"></span><span data-i18n="name_full"></span></div>
+          <div class="row"><span data-i18n="fact_email"></span><a href="mailto:AmirHanna2001@gmail.com">AmirHanna2001@gmail.com</a></div>
+          <div class="row"><span data-i18n="fact_phone"></span><a href="tel:+201225319857" dir="ltr">+20 122 531 9857</a></div>
+          <div class="row"><span data-i18n="fact_location"></span><span data-i18n="location_value"></span></div>
+          <div class="row"><span>LinkedIn</span><a href="https://www.linkedin.com/in/amirhanna2001/" target="_blank" rel="noopener">amirhanna2001</a></div>
+          <div class="row"><span>GitHub</span><a href="https://github.com/amirhanna2001" target="_blank" rel="noopener">amirhanna2001</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="skills">
+    <div class="w">
+      <h2 class="t" data-i18n="skills_title"></h2>
+      <p class="sub" data-i18n="skills_sub"></p>
+      <div class="sk">
+        <div><h3 data-i18n="skills_prog"></h3><p data-i18n="skills_prog_desc"></p></div>
+        <div class="tags"><span class="tg">C#</span><span class="tg">HTML</span><span class="tg">CSS</span><span class="tg">JavaScript</span><span class="tg">OOP</span><span class="tg">Data Structures</span><span class="tg">Algorithms</span><span class="tg">SOLID Principles</span><span class="tg">Design Patterns</span><span class="tg">Clean Code</span></div>
+      </div>
+      <div class="sk">
+        <div><h3 data-i18n="skills_fw"></h3><p data-i18n="skills_fw_desc"></p></div>
+        <div class="tags"><span class="tg">ASP.NET Core (MVC, API, Minimal APIs)</span><span class="tg">Razor Pages</span><span class="tg">DTOs</span><span class="tg">AutoMapper</span><span class="tg">LINQ</span><span class="tg">Entity Framework Core</span><span class="tg">Clean Architecture</span><span class="tg">N-Tier Architecture</span><span class="tg">Repository Pattern</span><span class="tg">Unit of Work</span><span class="tg">Dependency Injection</span><span class="tg">MVVM</span><span class="tg">Hangfire</span><span class="tg">QuestPDF</span><span class="tg">Aspose</span><span class="tg">Syncfusion</span></div>
+      </div>
+      <div class="sk">
+        <div><h3 data-i18n="skills_db"></h3><p data-i18n="skills_db_desc"></p></div>
+        <div class="tags"><span class="tg">Microsoft SQL Server</span><span class="tg">Microsoft Identity</span><span class="tg">JWT</span></div>
+      </div>
+      <div class="sk">
+        <div><h3 data-i18n="skills_tools"></h3><p data-i18n="skills_tools_desc"></p></div>
+        <div class="tags"><span class="tg">Git</span><span class="tg">GitHub</span><span class="tg">Swagger</span><span class="tg">DataTables</span></div>
+      </div>
+      <div class="sk">
+        <div><h3 data-i18n="skills_lang"></h3><p data-i18n="skills_lang_desc"></p></div>
+        <div class="tags"><span class="tg" data-i18n="lang_ar"></span><span class="tg" data-i18n="lang_en"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="exp">
+    <div class="w">
+      <h2 class="t" data-i18n="exp_title"></h2>
+      <p class="sub" data-i18n="exp_sub"></p>
+      <div class="xr">
+        <div class="dt" data-i18n="exp1_date"></div>
+        <div>
+          <h3 data-i18n="exp1_title"></h3><h4 data-i18n="exp1_company"></h4>
+          <ul><li data-i18n="exp1_1"></li><li data-i18n="exp1_2"></li><li data-i18n="exp1_3"></li><li data-i18n="exp1_4"></li><li data-i18n="exp1_5"></li></ul>
+        </div>
+      </div>
+      <div class="xr">
+        <div class="dt" dir="ltr">02/2026 – 06/2026</div>
+        <div>
+          <h3 data-i18n="exp2_title"></h3><h4 data-i18n="exp2_company"></h4>
+          <ul><li data-i18n="exp2_1"></li></ul>
+        </div>
+      </div>
+      <div class="xr">
+        <div class="dt" dir="ltr">12/2024 – 06/2025</div>
+        <div>
+          <h3 data-i18n="exp3_title"></h3><h4 data-i18n="exp3_company"></h4>
+          <ul><li data-i18n="exp3_1"></li><li data-i18n="exp3_2"></li><li data-i18n="exp3_3"></li></ul>
+        </div>
+      </div>
+      <div class="xr">
+        <div class="dt" dir="ltr">08/2023 – 09/2023</div>
+        <div>
+          <h3 data-i18n="exp4_title"></h3><h4 data-i18n="exp4_company"></h4>
+          <ul><li data-i18n="exp4_1"></li><li data-i18n="exp4_2"></li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="projects">
+    <div class="w">
+      <h2 class="t" data-i18n="proj_title"></h2>
+      <p class="sub" data-i18n="proj_sub"></p>
+      <div class="pg">
+        <article class="pj ent w2">
+          <h3>ICTS</h3><h4 data-i18n="p1_sub"></h4><p data-i18n="p1_desc"></p>
+          <div class="tags"><span class="tg">ASP.NET Core MVC</span><span class="tg">Hangfire</span><span class="tg">EF Core</span><span class="tg">SQL Server</span></div>
+        </article>
+        <article class="pj ent">
+          <h3>ICTS Circular</h3><h4 data-i18n="p2_sub"></h4><p data-i18n="p2_desc"></p>
+          <div class="tags"><span class="tg">Hangfire</span><span class="tg">ASP.NET Core</span><span class="tg">Background Jobs</span></div>
+        </article>
+        <article class="pj ent">
+          <h3>ICTS CommGate</h3><h4 data-i18n="p3_sub"></h4><p data-i18n="p3_desc"></p>
+          <div class="tags"><span class="tg">APIs</span><span class="tg">Hangfire</span><span class="tg">Windows Services</span></div>
+        </article>
+        <article class="pj w2">
+          <div class="dt" dir="ltr">2025</div><h3 data-i18n="p4_title"></h3><p data-i18n="p4_desc"></p>
+          <div class="tags"><span class="tg">.NET 8</span><span class="tg">ASP.NET Core MVC</span><span class="tg">EF Core</span><span class="tg">Microsoft Identity</span><span class="tg">SQL Server</span></div>
+        </article>
+        <article class="pj">
+          <div class="dt" dir="ltr">12/2024</div><h3 data-i18n="p5_title"></h3><p data-i18n="p5_desc"></p>
+          <div class="tags"><span class="tg">ASP.NET Core MVC</span><span class="tg">Hangfire</span><span class="tg">QuestPDF</span><span class="tg">Microsoft Identity</span><span class="tg">MSSQL</span><span class="tg">Bootstrap</span></div>
+        </article>
+        <article class="pj">
+          <div class="dt" dir="ltr">03/2025</div><h3 data-i18n="p6_title"></h3><p data-i18n="p6_desc"></p>
+          <div class="tags"><span class="tg">ASP.NET Core MVC</span><span class="tg">EF Core</span><span class="tg">Microsoft Identity</span><span class="tg">QuestPDF</span><span class="tg">MSSQL</span></div>
+        </article>
+        <article class="pj">
+          <div class="dt" dir="ltr">08/2024</div><h3 data-i18n="p7_title"></h3><p data-i18n="p7_desc"></p>
+          <div class="tags"><span class="tg">ASP.NET Core Web API</span><span class="tg">EF Core</span><span class="tg">JWT</span><span class="tg">Swagger</span><span class="tg">MSSQL</span></div>
+        </article>
+        <article class="pj">
+          <div class="dt" dir="ltr">08/2023</div><h3 data-i18n="p8_title"></h3><p data-i18n="p8_desc"></p>
+          <div class="tags"><span class="tg">.NET Core API</span><span class="tg">Angular</span></div>
+        </article>
+        <article class="pj w2">
+          <div class="dt" dir="ltr">02/2023</div><h3 data-i18n="p9_title"></h3><p data-i18n="p9_desc"></p>
+          <div class="tags"><span class="tg">ASP.NET Core MVC</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="edu">
+    <div class="w">
+      <h2 class="t" data-i18n="edu_title"></h2>
+      <p class="sub" data-i18n="edu_sub"></p>
+      <div class="ed">
+        <div class="dt" dir="ltr">09/2019 – 06/2023</div>
+        <h3 data-i18n="edu_degree"></h3><h4 data-i18n="edu_uni"></h4><p data-i18n="edu_details"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="contact">
+    <div class="w">
+      <h2 class="t" data-i18n="contact_title"></h2>
+      <p class="sub" data-i18n="contact_sub"></p>
+      <a class="mail" href="mailto:AmirHanna2001@gmail.com" dir="ltr">AmirHanna2001@gmail.com</a>
+      <div class="pp cb">
+        <h3 data-i18n="contact_box_title"></h3>
+        <p data-i18n="contact_box_desc"></p>
+        <div class="row"><span data-i18n="fact_email"></span><a href="mailto:AmirHanna2001@gmail.com">AmirHanna2001@gmail.com</a></div>
+        <div class="row"><span data-i18n="fact_phone"></span><a href="tel:+201225319857" dir="ltr">+20 122 531 9857</a></div>
+        <div class="row"><span data-i18n="fact_location"></span><span data-i18n="location_value"></span></div>
+        <div class="row"><span>LinkedIn</span><a href="https://www.linkedin.com/in/amirhanna2001/" target="_blank" rel="noopener">linkedin.com/in/amirhanna2001</a></div>
+        <div class="row"><span>GitHub</span><a href="https://github.com/amirhanna2001" target="_blank" rel="noopener">github.com/amirhanna2001</a></div>
+        <div style="margin-top:22px"><a class="btn b-cv" href="cv.pdf" download="Amir-Hanna-CV.pdf">⬇ <span data-i18n="btn_cv"></span></a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="w">
+    <b class="logo" dir="ltr"><i>&lt;</i>Amir Hanna<i>/&gt;</i></b>
+    <p data-i18n="footer"></p>
+  </div>
+</footer>
+
+<script>
+const translations = {
+  en: {
+    nav_home: "Home", nav_about: "About Me", nav_skills: "Skills & Tools", nav_exp: "Experience",
+    nav_projects: "Featured Projects", nav_edu: "Education", nav_contact: "Get In Touch",
+    btn_cv: "Download CV",
+    doc_title: "Amir Hanna | Mid-Level .NET Developer",
+    name1: "Amir", name2: "Hanna", name_full: "Amir Hanna",
+    exp1_date: "06/2025 – Present",
+    badge: "OPEN TO OPPORTUNITIES",
+    hello: "Hello, I’m",
+    title: "Mid-Level .NET Developer",
+    lead: "I build enterprise-scale systems for 15,000+ users with ASP.NET Core, Clean Architecture and Hangfire background jobs, from requirement analysis to production support.",
+    btn_contact: "Get In Touch", btn_work: "View My Work",
+    about_title: "About Me",
+    about_sub: "Clean architecture, SOLID code and reliable production systems.",
+    about_story_title: "My Story",
+    about_story: "I’m a full-stack .NET developer with a B.Sc. in Computer Science and Artificial Intelligence from Helwan University (2023). I specialize in ASP.NET Core, Clean Architecture and background-job processing for enterprise systems that serve 15,000+ users. I’ve delivered correspondence management, HR and financial platforms, covering API design, EF Core and multi-system integrations. I work through the full cycle: requirement analysis, UAT, deployment, monitoring and root-cause troubleshooting in production. I enjoy refactoring large codebases toward SOLID principles, and I also served as a Data Structures teaching assistant.",
+    about_facts_title: "Quick Facts",
+    fact_name: "Name", fact_email: "Email", fact_phone: "Phone", fact_location: "Location",
+    location_value: "Cairo, Egypt",
+    skills_title: "Skills & Tools",
+    skills_sub: "The languages, frameworks and tools I use to build and maintain enterprise systems.",
+    skills_prog: "Programming", skills_prog_desc: "Languages and engineering fundamentals.",
+    skills_fw: "Frameworks & Libraries", skills_fw_desc: "Backend, architecture and document tooling.",
+    skills_db: "Databases & Security", skills_db_desc: "Data storage and authentication.",
+    skills_tools: "Tools", skills_tools_desc: "Daily development tools.",
+    skills_lang: "Languages", skills_lang_desc: "Language proficiency.",
+    lang_ar: "Arabic: Native", lang_en: "English: Intermediate",
+    exp_title: "Experience",
+    exp_sub: "A timeline of professional roles and contributions.",
+    exp1_title: "Full Stack .NET Developer",
+    exp1_company: "SquareOne Technologies (Remote, Full-Time)",
+    exp1_1: "Build backend and frontend modules of the ICTS platform in a 2–4 person team, across ICTS, ICTS-Circular and CommGate for 15,000+ users",
+    exp1_2: "Refactor core controllers (CorrespondencePhase, HomeController) by extracting reusable async helpers and consolidating duplicated logic to follow SOLID principles",
+    exp1_3: "Migrated legacy Windows Services to Hangfire background jobs, including a custom Recurring Job Manager that registers jobs automatically",
+    exp1_4: "Built the ManageTracking modal feature from scratch, shipping small, low-risk changes through code review",
+    exp1_5: "Cover the full delivery cycle: requirement analysis, UAT, deployment, monitoring and root-cause troubleshooting across code, database, APIs and server configuration",
+    exp2_title: "Teaching Assistant, Data Structures",
+    exp2_company: "AAST Sheraton Branch (Part-Time)",
+    exp2_1: "Supported lab sessions, student Q&A and coursework review for undergraduate CS students for one term",
+    exp3_title: "Full Stack .NET Developer",
+    exp3_company: "Optimum Solution (On-Site, Full-Time)",
+    exp3_1: "Owned major components of two full-cycle builds, an International Arbitration financial app and an enterprise HR Management System, both delivered ahead of schedule",
+    exp3_2: "Built Hangfire recurring transaction automation, QuestPDF statement generation and stored-procedure performance optimization for the Arbitration app",
+    exp3_3: "Built relational data models and permission-based access control with Microsoft Identity for the Employees, Departments, Positions and Pay Codes modules",
+    exp4_title: "Full Stack .NET Developer Intern",
+    exp4_company: "EVA Pharma (On-Site, Internship)",
+    exp4_1: "Worked on a real feature module across the stack, from frontend data capture to database storage",
+    exp4_2: "Practiced analyzing and validating data as it moved from UI input to the persistence layer",
+    proj_title: "Featured Projects",
+    proj_sub: "Enterprise platforms and independent builds.",
+    p1_sub: "Integrated Correspondence Tracking System",
+    p1_desc: "Core platform for official correspondences, users and organizational workflows for 15,000+ users. Syncs with CommGate, Circular, PCU and other systems through scheduled Hangfire jobs, and batches and delays email dispatching to cut real-time load.",
+    p2_sub: "Announcements and circulars",
+    p2_desc: "Publishes circulars such as delegations, obituaries and announcements, integrated with ICTS. Background jobs handle scheduled publishing, user sync and delayed email notifications.",
+    p3_sub: "Integration gateway",
+    p3_desc: "Gateway between ICTS and external users, handling API-based and internal background integrations. Syncs correspondences and users with Hangfire jobs and Windows services, with logging and validation. Live at <a href=\"https://pwacts.ashghal.gov.qa/\" target=\"_blank\" rel=\"noopener\">pwacts.ashghal.gov.qa</a>.",
+    p4_title: "HR Management System",
+    p4_desc: "Enterprise HR system on N-Tier Architecture and .NET 8 with permission-based access through Microsoft Identity. Includes Employees, Departments, Positions, Vacation Policies and Pay Codes, biometric fingerprint attendance, Excel imports, and configurable vacation and holiday rules that automate absence calculations.",
+    p5_title: "International Arbitration Web App",
+    p5_desc: "Independently designed, developed and deployed a financial management app for clients, partners, matters, transactions, multi-level lawyer roles, timesheets and multi-currency statements. Hangfire automates recurring transactions, QuestPDF generates PDF statements, and stored procedures speed up queries.",
+    p6_title: "Cashier System",
+    p6_desc: "Cashier system for MN Lighting to manage customers, products and invoices, with role-based access for admins and users and invoice generation and printing.",
+    p7_title: "Book Management System (API)",
+    p7_desc: "RESTful API for books, authors and categories on N-Tier architecture, with pagination, category and author lookup, and role-based login and registration secured by Identity and JWT.",
+    p8_title: "QR Code Generator",
+    p8_desc: ".NET Core API with an Angular app that generates QR codes and records scan analytics such as location and browser type.",
+    p9_title: "Movie Database Web App",
+    p9_desc: "IMDb-style app with admin-approved submissions and role-based access.",
+    edu_title: "Education", edu_sub: "Academic background.",
+    edu_degree: "Bachelor of Computer Science and Artificial Intelligence",
+    edu_uni: "Helwan University, Cairo",
+    edu_details: "Major: Computer Science. Minor: Information Systems.",
+    contact_title: "Get In Touch",
+    contact_sub: "Let’s collaborate on your next project.",
+    contact_box_title: "Let’s Connect",
+    contact_box_desc: "Available for new opportunities and collaborations.",
+    footer: "© 2026 Amir Hanna. All rights reserved."
+  },
+  ar: {
+    nav_home: "الرئيسية", nav_about: "نبذة عني", nav_skills: "المهارات والأدوات", nav_exp: "الخبرة",
+    nav_projects: "المشاريع المميزة", nav_edu: "التعليم", nav_contact: "تواصل معي",
+    btn_cv: "تحميل السيرة الذاتية",
+    doc_title: "أمير حنا | مطور \u2066.NET\u2069 متوسط المستوى",
+    name1: "أمير", name2: "حنا", name_full: "أمير حنا",
+    exp1_date: "06/2025 – الآن",
+    badge: "متاح للفرص",
+    hello: "مرحباً، أنا",
+    title: "مطور \u2066.NET\u2069 متوسط المستوى",
+    lead: "أبني أنظمة على مستوى المؤسسات تخدم أكثر من 15,000 مستخدم باستخدام ASP.NET Core والهندسة النظيفة ومهام الخلفية بـ Hangfire، من تحليل المتطلبات حتى دعم الإنتاج.",
+    btn_contact: "تواصل معي", btn_work: "عرض أعمالي",
+    about_title: "نبذة عني",
+    about_sub: "هندسة نظيفة، كود SOLID وأنظمة إنتاج موثوقة.",
+    about_story_title: "قصتي",
+    about_story: "أنا مطور \u2066.NET\u2069 كامل المكدس حاصل على بكالوريوس علوم الحاسب والذكاء الاصطناعي من جامعة حلوان (2023). أتخصص في ASP.NET Core والهندسة النظيفة ومعالجة المهام الخلفية للأنظمة المؤسسية التي تخدم أكثر من 15,000 مستخدم. قدّمت منصات لإدارة المراسلات والموارد البشرية والأنظمة المالية، وشملت تصميم واجهات برمجة التطبيقات وEF Core وتكامل الأنظمة المتعددة. أعمل عبر الدورة الكاملة: تحليل المتطلبات، اختبار القبول، النشر، المراقبة واستكشاف الأخطاء في الإنتاج. أستمتع بإعادة هيكلة قواعد الكود الكبيرة نحو مبادئ SOLID، وعملت أيضاً كمساعد تدريس لهياكل البيانات.",
+    about_facts_title: "معلومات سريعة",
+    fact_name: "الاسم", fact_email: "البريد الإلكتروني", fact_phone: "الهاتف", fact_location: "الموقع",
+    location_value: "القاهرة، مصر",
+    skills_title: "المهارات والأدوات",
+    skills_sub: "اللغات والأطر والأدوات التي أستخدمها لبناء وصيانة الأنظمة المؤسسية.",
+    skills_prog: "البرمجة", skills_prog_desc: "اللغات وأساسيات الهندسة البرمجية.",
+    skills_fw: "الأطر والمكتبات", skills_fw_desc: "الخلفية والهندسة وأدوات المستندات.",
+    skills_db: "قواعد البيانات والأمان", skills_db_desc: "تخزين البيانات والمصادقة.",
+    skills_tools: "الأدوات", skills_tools_desc: "أدوات التطوير اليومية.",
+    skills_lang: "اللغات", skills_lang_desc: "مستوى إتقان اللغات.",
+    lang_ar: "العربية: لغة أم", lang_en: "الإنجليزية: متوسط",
+    exp_title: "الخبرة",
+    exp_sub: "جدول زمني للأدوار المهنية والمساهمات.",
+    exp1_title: "مطور \u2066.NET\u2069 كامل المكدس",
+    exp1_company: "SquareOne Technologies (عن بُعد، دوام كامل)",
+    exp1_1: "بناء وحدات الواجهة الأمامية والخلفية لمنصة ICTS ضمن فريق من 2–4 أشخاص، عبر ICTS وICTS-Circular وCommGate لأكثر من 15,000 مستخدم",
+    exp1_2: "إعادة هيكلة المتحكمات الأساسية (CorrespondencePhase، HomeController) باستخراج مساعدات غير متزامنة قابلة لإعادة الاستخدام وتوحيد المنطق المكرر لاتباع مبادئ SOLID",
+    exp1_3: "ترحيل خدمات Windows القديمة إلى مهام خلفية بـ Hangfire، بما في ذلك مدير مهام متكررة مخصص يسجّل المهام تلقائياً",
+    exp1_4: "بناء ميزة ManageTracking من الصفر، مع تسليم تغييرات صغيرة منخفضة المخاطر عبر مراجعة الكود",
+    exp1_5: "تغطية دورة التسليم الكاملة: تحليل المتطلبات، اختبار القبول، النشر، المراقبة واستكشاف الأخطاء عبر الكود وقاعدة البيانات وواجهات البرمجة وإعدادات الخادم",
+    exp2_title: "مساعد تدريس، هياكل البيانات",
+    exp2_company: "الأكاديمية العربية للعلوم والتكنولوجيا – فرع شيراتون (دوام جزئي)",
+    exp2_1: "دعم جلسات المعامل وأسئلة الطلاب ومراجعة الواجبات لطلاب علوم الحاسب لمدة فصل دراسي",
+    exp3_title: "مطور \u2066.NET\u2069 كامل المكدس",
+    exp3_company: "Optimum Solution (حضوري، دوام كامل)",
+    exp3_1: "امتلاك مكونات رئيسية في مشروعين كاملين: تطبيق مالي للتحكيم الدولي ونظام إدارة موارد بشرية مؤسسي، وكلاهما سُلّم قبل الموعد",
+    exp3_2: "بناء أتمتة المعاملات المتكررة بـ Hangfire وتوليد كشوف PDF بـ QuestPDF وتحسين أداء الإجراءات المخزنة لتطبيق التحكيم",
+    exp3_3: "بناء نماذج البيانات العلائقية والتحكم في الوصول القائم على الصلاحيات باستخدام Microsoft Identity لوحدات الموظفين والأقسام والمناصب وأكواد الدفع",
+    exp4_title: "متدرب مطور \u2066.NET\u2069 كامل المكدس",
+    exp4_company: "إيفا فارما (حضوري، تدريب)",
+    exp4_1: "العمل على وحدة ميزة حقيقية عبر المكدس، من التقاط البيانات في الواجهة الأمامية إلى التخزين في قاعدة البيانات",
+    exp4_2: "ممارسة تحليل والتحقق من البيانات أثناء انتقالها من إدخال الواجهة إلى طبقة التخزين",
+    proj_title: "المشاريع المميزة",
+    proj_sub: "منصات مؤسسية ومشاريع مستقلة.",
+    p1_sub: "نظام تتبع المراسلات المتكامل",
+    p1_desc: "المنصة الأساسية للمراسلات الرسمية والمستخدمين وسير العمل التنظيمي لأكثر من 15,000 مستخدم. تتزامن مع CommGate وCircular وPCU وأنظمة أخرى عبر مهام Hangfire المجدولة، وتجمع وتؤخر إرسال البريد الإلكتروني لتقليل الحمل الفوري.",
+    p2_sub: "الإعلانات والتعاميم",
+    p2_desc: "ينشر التعاميم مثل التفويضات والوفيات والإعلانات، متكامل مع ICTS. تتعامل مهام الخلفية مع النشر المجدول ومزامنة المستخدمين وإشعارات البريد الإلكتروني المؤجلة.",
+    p3_sub: "بوابة التكامل",
+    p3_desc: "بوابة بين ICTS والمستخدمين الخارجيين، تتعامل مع التكاملات عبر واجهات البرمجة والمهام الخلفية الداخلية. تتزامن المراسلات والمستخدمين مع مهام Hangfire وخدمات Windows، مع التسجيل والتحقق. مباشر على <a href=\"https://pwacts.ashghal.gov.qa/\" target=\"_blank\" rel=\"noopener\">pwacts.ashghal.gov.qa</a>.",
+    p4_title: "نظام إدارة الموارد البشرية",
+    p4_desc: "نظام موارد بشرية مؤسسي على هندسة N-Tier و\u2066.NET 8\u2069 مع تحكم في الوصول قائم على الصلاحيات عبر Microsoft Identity. يشمل الموظفين والأقسام والمناصب وسياسات الإجازات وأكواد الدفع، وحضور البصمة، واستيراد Excel، وقواعد إجازات وعطلات قابلة للتكوين تؤتمت حسابات الغياب.",
+    p5_title: "تطبيق ويب للتحكيم الدولي",
+    p5_desc: "صمّمت وطوّرت ونشرت بشكل مستقل تطبيقاً مالياً للعملاء والشركاء والقضايا والمعاملات وأدوار المحامين متعددة المستويات والجداول الزمنية والكشوف متعددة العملات. يؤتمت Hangfire المعاملات المتكررة، ويولّد QuestPDF كشوف PDF، وتسرّع الإجراءات المخزنة الاستعلامات.",
+    p6_title: "نظام الكاشير",
+    p6_desc: "نظام كاشير لـ MN Lighting لإدارة العملاء والمنتجات والفواتير، مع وصول قائم على الأدوار للمسؤولين والمستخدمين وتوليد وطباعة الفواتير.",
+    p7_title: "نظام إدارة الكتب (API)",
+    p7_desc: "واجهة برمجة RESTful للكتب والمؤلفين والفئات على هندسة N-Tier، مع ترقيم الصفحات والبحث عن الفئات والمؤلفين، وتسجيل دخول وتسجيل قائم على الأدوار مؤمّن بـ Identity وJWT.",
+    p8_title: "مولّد رموز QR",
+    p8_desc: "واجهة برمجة \u2066.NET Core\u2069 مع تطبيق Angular يولّد رموز QR ويسجّل تحليلات المسح مثل الموقع ونوع المتصفح.",
+    p9_title: "تطبيق قاعدة بيانات الأفلام",
+    p9_desc: "تطبيق بأسلوب IMDb مع موافقات المسؤولين وتقديمات ووصول قائم على الأدوار.",
+    edu_title: "التعليم", edu_sub: "الخلفية الأكاديمية.",
+    edu_degree: "بكالوريوس علوم الحاسب والذكاء الاصطناعي",
+    edu_uni: "جامعة حلوان، القاهرة",
+    edu_details: "التخصص: علوم الحاسب. التخصص الفرعي: نظم المعلومات.",
+    contact_title: "تواصل معي",
+    contact_sub: "لنتعاون في مشروعك القادم.",
+    contact_box_title: "لنتواصل",
+    contact_box_desc: "متاح للفرص الجديدة والتعاون.",
+    footer: "© 2026 أمير حنا. جميع الحقوق محفوظة."
+  }
+};
+
+function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+let currentLang = "en";
+try { currentLang = localStorage.getItem("portfolio-lang") || "en"; } catch (e) {}
+
+function applyLanguage(lang) {
+  currentLang = lang;
+  const html = document.documentElement;
+  html.lang = lang;
+  html.dir = lang === "ar" ? "rtl" : "ltr";
+  document.getElementById("langBtn").textContent = lang === "ar" ? "EN" : "ع";
+  document.title = translations[lang].doc_title;
+  document.querySelector(".ph img").alt = translations[lang].name_full;
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    const value = translations[lang][key];
+    if (value === undefined) return;
+    if (key === "p3_desc") el.innerHTML = value; else el.textContent = value;
+  });
+}
+
+function applyTheme(t) {
+  document.documentElement.setAttribute("data-theme", t);
+  document.getElementById("themeBtn").textContent = t === "dark" ? "☀" : "☾";
+}
+
+document.getElementById("langBtn").addEventListener("click", () => {
+  const n = currentLang === "en" ? "ar" : "en";
+  store("portfolio-lang", n);
+  applyLanguage(n);
+});
+document.getElementById("themeBtn").addEventListener("click", () => {
+  const n = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  store("portfolio-theme", n);
+  applyTheme(n);
+});
+
+applyLanguage(currentLang);
+applyTheme(document.documentElement.getAttribute("data-theme"));
+
+// cursor-follow glow on cards and rows
+document.addEventListener("pointermove", e => {
+  const c = e.target.closest && e.target.closest(".pj, .sk, .xr");
+  if (!c) return;
+  const r = c.getBoundingClientRect();
+  c.style.setProperty("--mx", (e.clientX - r.left) + "px");
+  c.style.setProperty("--my", (e.clientY - r.top) + "px");
+});
+
+(function () {
+  const nav = document.getElementById("nav");
+  document.getElementById("mb").addEventListener("click", () => nav.classList.toggle("open"));
+  nav.addEventListener("click", () => nav.classList.remove("open"));
+  if (!("IntersectionObserver" in window)) return;
+  const links = {};
+  nav.querySelectorAll("a").forEach(a => { links[a.getAttribute("href").slice(1)] = a; });
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (e.isIntersecting && links[e.target.id]) {
+        Object.values(links).forEach(a => a.classList.remove("on"));
+        links[e.target.id].classList.add("on");
+      }
+    });
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  document.querySelectorAll("section[id]").forEach(s => io.observe(s));
+})();
+</script>
+</body>
+</html>
